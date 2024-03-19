@@ -1,134 +1,118 @@
 # 🔒 PrivateGPT 📑
 
 [![Tests](https://github.com/imartinez/privateGPT/actions/workflows/tests.yml/badge.svg)](https://github.com/imartinez/privateGPT/actions/workflows/tests.yml?query=branch%3Amain)
-[![Website](https://img.shields.io/website?up_message=check%20it&down_message=down&url=https%3A%2F%2Fdocs.privategpt.dev%2F&label=Documentation)](https://docs.privategpt.dev/)
+[![Website](https://img.shields.io/website?up_message=check%20it&down_message=down&url=https%3A%2F%2Fdocs.privategpt.dev%2F&label=Dokumentation)](https://docs.privategpt.dev/)
 
 [![Discord](https://img.shields.io/discord/1164200432894234644?logo=discord&label=PrivateGPT)](https://discord.gg/bK6mRVpErU)
-[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/ZylonPrivateGPT)](https://twitter.com/ZylonPrivateGPT)
+[![X (ehemals Twitter) Folgen](https://img.shields.io/twitter/follow/ZylonPrivateGPT)](https://twitter.com/ZylonPrivateGPT)
 
 
-> Install & usage docs: https://docs.privategpt.dev/
+> Installations- & Nutzungsanleitungen: https://docs.privategpt.dev/
 > 
-> Join the community: [Twitter](https://twitter.com/PrivateGPT_AI) & [Discord](https://discord.gg/bK6mRVpErU)
+> Tritt der Community bei: [Twitter](https://twitter.com/PrivateGPT_AI) & [Discord](https://discord.gg/bK6mRVpErU)
 
 ![Gradio UI](/fern/docs/assets/ui.png?raw=true)
 
-PrivateGPT is a production-ready AI project that allows you to ask questions about your documents using the power
-of Large Language Models (LLMs), even in scenarios without an Internet connection. 100% private, no data leaves your
-execution environment at any point.
+PrivateGPT ist ein produktionsbereites KI-Projekt, das es Ihnen ermöglicht, Fragen zu Ihren Dokumenten mithilfe von Large Language Models (LLMs) zu stellen, auch in Szenarien ohne Internetverbindung. 100 % privat, keine Daten verlassen Ihre Ausführungsumgebung zu irgendeinem Zeitpunkt.
 
-The project provides an API offering all the primitives required to build private, context-aware AI applications.
-It follows and extends the [OpenAI API standard](https://openai.com/blog/openai-api),
-and supports both normal and streaming responses.
+Das Projekt bietet eine API an, die alle primitives bereitstellt, die zum Erstellen privater, kontextbewusster KI-Anwendungen erforderlich sind. Es folgt und erweitert den [OpenAI API-Standard](https://openai.com/blog/openai-api) und unterstützt sowohl normale als auch Streaming-Antworten.
 
-The API is divided into two logical blocks:
+Die API ist in zwei logische Blöcke unterteilt:
 
-**High-level API**, which abstracts all the complexity of a RAG (Retrieval Augmented Generation)
-pipeline implementation:
-- Ingestion of documents: internally managing document parsing,
-splitting, metadata extraction, embedding generation and storage.
-- Chat & Completions using context from ingested documents:
-abstracting the retrieval of context, the prompt engineering and the response generation.
+**Hochrangige API**, die alle Komplexität einer RAG (Retrieval Augmented Generation) Pipeline-Implementierung abstrahiert:
+- Aufnahme von Dokumenten: Internes Management von Dokumentenparsen, Aufteilen, Metadatenextraktion, Einbettungsgenerierung und Speicherung.
+- Chat & Vervollständigungen unter Verwendung von Kontext aus aufgenommenen Dokumenten: Abstrahierung der Abfrage des Kontexts, der Anregungsentwicklung und der Antwortgenerierung.
 
-**Low-level API**, which allows advanced users to implement their own complex pipelines:
-- Embeddings generation: based on a piece of text.
-- Contextual chunks retrieval: given a query, returns the most relevant chunks of text from the ingested documents.
+**Niedrigrangige API**, die es fortgeschrittenen Benutzern ermöglicht, ihre eigenen komplexen Pipelines zu implementieren:
+- Einbettungsgenerierung: basierend auf einem Textstück.
+- Kontextbezogene Chunk-Abfrage: Gibt eine Abfrage zurück und gibt die relevantesten Textstücke aus den aufgenommenen Dokumenten zurück.
 
-In addition to this, a working [Gradio UI](https://www.gradio.app/)
-client is provided to test the API, together with a set of useful tools such as bulk model
-download script, ingestion script, documents folder watch, etc.
+Zusätzlich dazu wird ein funktionierender [Gradio UI](https://www.gradio.app/) Client bereitgestellt, um die API zu testen, zusammen mit einer Reihe nützlicher Tools wie Skript zum Massenmodell-Download, Skript zur Aufnahme, Überwachung des Dokumentenordners usw.
 
-> 👂 **Need help applying PrivateGPT to your specific use case?**
-> [Let us know more about it](https://forms.gle/4cSDmH13RZBHV9at7)
-> and we'll try to help! We are refining PrivateGPT through your feedback.
+> 👂 **Brauchen Sie Hilfe bei der Anwendung von PrivateGPT für Ihren spezifischen Anwendungsfall?**
+> [Lassen Sie es uns wissen](https://forms.gle/4cSDmH13RZBHV9at7)
+> und wir werden versuchen zu helfen! Wir verbessern PrivateGPT durch Ihr Feedback.
 
-## 🎞️ Overview
-DISCLAIMER: This README is not updated as frequently as the [documentation](https://docs.privategpt.dev/).
-Please check it out for the latest updates!
+## 🎞️ Überblick
+HAFTUNGSAUSSCHLUSS: Dieses README wird nicht so häufig aktualisiert wie die [Dokumentation](https://docs.privategpt.dev/).
+Bitte schauen Sie dort für die neuesten Updates nach!
 
-### Motivation behind PrivateGPT
-Generative AI is a game changer for our society, but adoption in companies of all sizes and data-sensitive
-domains like healthcare or legal is limited by a clear concern: **privacy**.
-Not being able to ensure that your data is fully under your control when using third-party AI tools
-is a risk those industries cannot take.
+### Motivation hinter PrivateGPT
+Generative KI ist ein Game Changer für unsere Gesellschaft, aber die Akzeptanz in Unternehmen aller Größen und datensensiblen Bereichen wie Gesundheitswesen oder Recht ist durch eine klare Sorge begrenzt: **Privatsphäre**.
+Die Unfähigkeit, sicherzustellen, dass Ihre Daten vollständig unter Ihrer Kontrolle stehen, wenn Sie KI-Tools von Drittanbietern verwenden, ist ein Risiko, das sich diese Branchen nicht leisten können.
 
-### Primordial version
-The first version of PrivateGPT was launched in May 2023 as a novel approach to address the privacy
-concerns by using LLMs in a complete offline way.
+### Urversion
+Die erste Version von PrivateGPT wurde im Mai 2023 als neuartiger Ansatz zur Bewältigung der Datenschutzbedenken durch die Verwendung von LLMs auf eine vollständig offline Art und Weise eingeführt.
 
-That version, which rapidly became a go-to project for privacy-sensitive setups and served as the seed
-for thousands of local-focused generative AI projects, was the foundation of what PrivateGPT is becoming nowadays;
-thus a simpler and more educational implementation to understand the basic concepts required
-to build a fully local -and therefore, private- chatGPT-like tool.
+Diese Version, die schnell zu einem Standardprojekt für datenschutzsensible Setups wurde und als Keim für tausende lokal fokussierte generative KI-Projekte diente, war die Grundlage dessen, was PrivateGPT heute wird; daher eine einfachere und lehrreichere Implementierung, um die grundlegenden Konzepte zu verstehen, die erforderlich sind, um ein vollständig lokales - und daher privates - ChatGPT-ähnliches Tool zu erstellen.
 
-If you want to keep experimenting with it, we have saved it in the
-[primordial branch](https://github.com/imartinez/privateGPT/tree/primordial) of the project.
+Wenn Sie weiterhin damit experimentieren möchten, haben wir es im [Urversion-Zweig](https://github.com/imartinez/privateGPT/tree/primordial) des Projekts gespeichert.
 
-> It is strongly recommended to do a clean clone and install of this new version of
-PrivateGPT if you come from the previous, primordial version.
+> Es wird dringend empfohlen, eine saubere Kopie anzufertigen und diese neue Version von
+PrivateGPT zu installieren, wenn Sie von der vorherigen, urzeitlichen Version kommen.
 
-### Present and Future of PrivateGPT
-PrivateGPT is now evolving towards becoming a gateway to generative AI models and primitives, including
-completions, document ingestion, RAG pipelines and other low-level building blocks.
-We want to make it easier for any developer to build AI applications and experiences, as well as provide
-a suitable extensive architecture for the community to keep contributing.
+### Gegenwart und Zukunft von PrivateGPT
+PrivateGPT entwickelt sich jetzt zu einem Gateway für generative KI-Modelle und primitives, einschließlich
+Vervollständigungen, Dokumentenaufnahme, RAG-Pipelines und anderen niedrigschwelligen Bausteinen.
+Wir möchten es jedem Entwickler erleichtern, KI-Anwendungen und -Erfahrungen zu erstellen, sowie eine geeignete umfangreiche Architektur für die Community bereitzustellen, um weiter beizutragen.
 
-Stay tuned to our [releases](https://github.com/imartinez/privateGPT/releases) to check out all the new features and changes included.
+Bleiben Sie auf unsere [Veröffentlichungen](https://github.com/imartinez/privateGPT/releases) gespannt, um alle neuen Funktionen und Änderungen zu sehen.
 
-## 📄 Documentation
-Full documentation on installation, dependencies, configuration, running the server, deployment options,
-ingesting local documents, API details and UI features can be found here: https://docs.privategpt.dev/
+## 📄 Dokumentation
+Die vollständige Dokumentation zur Installation, Abhängigkeiten, Konfiguration, Ausführung des Servers, Bereitstellungsoptionen,
+Aufnahme lokaler Dokumente, API-Details und UI-Funktionen finden Sie hier: https://docs.privategpt.dev/
 
-## 🧩 Architecture
-Conceptually, PrivateGPT is an API that wraps a RAG pipeline and exposes its
-primitives.
-* The API is built using [FastAPI](https://fastapi.tiangolo.com/) and follows
-  [OpenAI's API scheme](https://platform.openai.com/docs/api-reference).
-* The RAG pipeline is based on [LlamaIndex](https://www.llamaindex.ai/).
+## 🧩 Architektur
+Konzeptionell ist PrivateGPT eine API, die eine RAG-Pipeline umhüllt und ihre
+Primitives freilegt.
+* Die API wurde unter Verwendung von [FastAPI](https://fastapi.tiangolo.com/) erstellt und folgt
+ 
 
-The design of PrivateGPT allows to easily extend and adapt both the API and the
-RAG implementation. Some key architectural decisions are:
-* Dependency Injection, decoupling the different components and layers.
-* Usage of LlamaIndex abstractions such as `LLM`, `BaseEmbedding` or `VectorStore`,
-  making it immediate to change the actual implementations of those abstractions.
-* Simplicity, adding as few layers and new abstractions as possible.
-* Ready to use, providing a full implementation of the API and RAG
-  pipeline.
+ dem [API-Schema von OpenAI](https://platform.openai.com/docs/api-reference).
+* Die RAG-Pipeline basiert auf [LlamaIndex](https://www.llamaindex.ai/).
 
-Main building blocks:
-* APIs are defined in `private_gpt:server:<api>`. Each package contains an
-  `<api>_router.py` (FastAPI layer) and an `<api>_service.py` (the
-  service implementation). Each *Service* uses LlamaIndex base abstractions instead
-  of specific implementations,
-  decoupling the actual implementation from its usage.
-* Components are placed in
-  `private_gpt:components:<component>`. Each *Component* is in charge of providing
-  actual implementations to the base abstractions used in the Services - for example
-  `LLMComponent` is in charge of providing an actual implementation of an `LLM`
-  (for example `LlamaCPP` or `OpenAI`).
+Das Design von PrivateGPT ermöglicht es, sowohl die API als auch die
+RAG-Implementierung einfach zu erweitern und anzupassen. Einige wichtige architektonische Entscheidungen sind:
+* Dependency Injection, Entkopplung der verschiedenen Komponenten und Schichten.
+* Verwendung von LlamaIndex-Abstraktionen wie `LLM`, `BaseEmbedding` oder `VectorStore`,
+  was es sofort ermöglicht, die tatsächlichen Implementierungen dieser Abstraktionen zu ändern.
+* Einfachheit, Hinzufügen so weniger Schichten und neuer Abstraktionen wie möglich.
+* Einsatzbereit, Bereitstellung einer vollständigen Implementierung der API und RAG
+  Pipeline.
 
-## 💡 Contributing
-Contributions are welcomed! To ensure code quality we have enabled several format and
-typing checks, just run `make check` before committing to make sure your code is ok.
-Remember to test your code! You'll find a tests folder with helpers, and you can run
-tests using `make test` command.
+Hauptbausteine:
+* APIs sind in `private_gpt:server:<api>` definiert. Jedes Paket enthält einen
+  `<api>_router.py` (FastAPI-Schicht) und einen `<api>_service.py` (die
+  Dienstimplementierung). Jeder *Service* verwendet LlamaIndex-Basisabstraktionen anstelle von spezifischen Implementierungen,
+  Entkopplung der tatsächlichen Implementierung von ihrer Verwendung.
+* Komponenten sind in
+  `private_gpt:components:<component>` platziert. Jede *Komponente* ist dafür verantwortlich,
+  tatsächliche Implementierungen für die Basenabstraktionen bereitzustellen, die in den Services verwendet werden - zum Beispiel
+  `LLMComponent` ist dafür verantwortlich, eine tatsächliche Implementierung eines `LLM` bereitzustellen
+  (zum Beispiel `LlamaCPP` oder `OpenAI`).
 
-Don't know what to contribute? Here is the public 
-[Project Board](https://github.com/users/imartinez/projects/3) with several ideas. 
+## 💡 Mitarbeit
+Beiträge sind willkommen! Um die Codequalität zu gewährleisten, haben wir mehrere Format- und
+Typenprüfungen aktiviert. Führen Sie einfach `make check` aus, bevor Sie Änderungen commiten, um sicherzustellen, dass Ihr Code in Ordnung ist.
+Vergessen Sie nicht, Ihren Code zu testen! Sie finden einen Testsordner mit Hilfsprogrammen, und Sie können
+Tests mit dem Befehl `make test` ausführen.
 
-Head over to Discord 
-#contributors channel and ask for write permissions on that GitHub project.
+Sie wissen nicht, was Sie beitragen sollen? Hier ist das öffentliche
+[Projektboard](https://github.com/users/imartinez/projects/3) mit verschiedenen Ideen.
+
+Gehen Sie zum Discord-Kanal
+#contributors und bitten Sie um Schreibberechtigungen für dieses GitHub-Projekt.
 
 ## 💬 Community
-Join the conversation around PrivateGPT on our:
+Treten Sie der Diskussion rund um PrivateGPT bei auf:
 - [Twitter (aka X)](https://twitter.com/PrivateGPT_AI)
 - [Discord](https://discord.gg/bK6mRVpErU)
 
-## 📖 Citation
-If you use PrivateGPT in a paper, check out the [Citation file](CITATION.cff) for the correct citation.  
-You can also use the "Cite this repository" button in this repo to get the citation in different formats.
+## 📖 Zitierung
+Wenn Sie PrivateGPT in einem Paper verwenden, schauen Sie sich die [Zitationsdatei](CITATION.cff) für die korrekte Zitierung an.  
+Sie können auch die Schaltfläche "Dieses Repository zitieren" in diesem Repository verwenden, um die Zitierung in verschiedenen Formaten zu erhalten.
 
-Here are a couple of examples:
+Hier sind ein paar Beispiele:
 
 #### BibTeX
 ```bibtex
@@ -147,15 +131,15 @@ year = {2023}
 Martínez Toro, I., Gallego Vico, D., & Orgaz, P. (2023). PrivateGPT [Computer software]. https://github.com/imartinez/privateGPT
 ```
 
-## 🤗 Partners & Supporters
-PrivateGPT is actively supported by the teams behind:
-* [Qdrant](https://qdrant.tech/), providing the default vector database
-* [Fern](https://buildwithfern.com/), providing Documentation and SDKs
-* [LlamaIndex](https://www.llamaindex.ai/), providing the base RAG framework and abstractions
+## 🤗 Partner & Unterstützer
+PrivateGPT wird aktiv unterstützt von den Teams hinter:
+* [Qdrant](https://qdrant.tech/), Bereitstellung der Standard-Vektordatenbank
+* [Fern](https://buildwithfern.com/), Bereitstellung von Dokumentation und SDKs
+* [LlamaIndex](https://www.llamaindex.ai/), Bereitstellung des Basissystems und der Abstraktionen für RAG
 
-This project has been strongly influenced and supported by other amazing projects like 
+Dieses Projekt wurde stark von anderen erstaunlichen Projekten beeinflusst und unterstützt wie
 [LangChain](https://github.com/hwchase17/langchain),
 [GPT4All](https://github.com/nomic-ai/gpt4all),
 [LlamaCpp](https://github.com/ggerganov/llama.cpp),
 [Chroma](https://www.trychroma.com/)
-and [SentenceTransformers](https://www.sbert.net/).
+und [SentenceTransformers](https://www.sbert.net/).
